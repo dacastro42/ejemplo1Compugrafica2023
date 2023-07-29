@@ -6,10 +6,10 @@
 package vista;
 
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 import modelo.Cliente;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import modelo.Utilidades;
+
 
 /**
  *
@@ -219,35 +219,13 @@ public class UICliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-
-            String nombreArchivo = "clientes.txt";
-
-            FileWriter fileWriter = new FileWriter(nombreArchivo);
-
-            BufferedWriter writer = new BufferedWriter(fileWriter);
-
-            for (Cliente cliente : listaClientes) {
-                writer.write("Nombre: " + cliente.getNombreP() + "\n");
-                writer.write("Teléfono: " + cliente.getTelefonoP() + "\n");
-                writer.write("Correo: " + cliente.getCorreoP() + "\n");
-                writer.write("Código: " + cliente.getCodigoCliente() + "\n");
-                writer.write("Edad: " + cliente.getEdadCliente() + "\n");
-                writer.write("-----------------------------\n");
+        
+            boolean t= Utilidades.guardarArchivo(listaClientes);
+            if(t){
+                JOptionPane.showMessageDialog(null, "Se creo el archivo");
+            }else{
+                JOptionPane.showMessageDialog(null, "No creo el archivo");
             }
-
-            writer.close();
-            fileWriter.close();
-
-            jTextArea1.setText("Datos guardados en el archivo: " + nombreArchivo);
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
-            jTextArea1.setText("Error al guardar los datos en el archivo.");
-        }
-
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
